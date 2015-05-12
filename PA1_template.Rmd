@@ -88,7 +88,7 @@ First calculate and report the total number of missing values in the dataset
 na_count = sum(is.na(activity))
 na_count
 ```
-So there are **`r na_count`** of missing values in our dataset.
+So there are **`r format(na_count)`** of missing values in our dataset.
   
 ## Are there differences in activity patterns between weekdays and weekends?
   
