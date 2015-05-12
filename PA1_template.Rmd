@@ -6,24 +6,26 @@ https://github.com/VDaroglou/RepData_PeerAssessment1
   
   
 ## Loading and preprocessing the data
-1.  The data is read as a data variable type data frame.  
-2.  **steps** column is converted to Numeric type.(missing values are coded as NA)  
-3.  **date** column is converted to Date type.  
-4.  **interval** column is converted to factor type.  
+1.  Set working direcory to the local repo directory.
+2.  The data is read as a data variable type data frame.  
+3.  **steps** column is converted to numeric type.(missing values are coded as NA)  
+4.  **date** column is converted to Date type.  
+5.  **interval** column is converted to numeric type.  
 ```{r}
 unzip("activity.zip")
 activity <- read.csv("activity.csv",
                      header=TRUE,
                      na.strings="NA",
-                     colClasses=c("numeric", "Date", "factor"))
+                     colClasses=c("numeric", "Date", "numeric"))
 ```
 Now, we can proceed with the data pre-examination of its str.
 ```{r}
 str(activity)
 ```
-  
+   
 ## What is mean total number of steps taken per day?
-For this part of the assignment, we can ignore the missing values in the data set.
+For this part of the assignment, we can ignore the missing values in the 
+data set.
 
 We initiate with a pre-calculation of steps aggregation by day:
 ```{r}
@@ -31,13 +33,62 @@ steps_taken_per_day <- aggregate(steps ~ date, activity, sum)
 colnames(steps_taken_per_day) <- c("date", "steps")
 ```
   
+The following histogram displays the total number of steps taken per day, 
+ignoring missing values.
+```{r}
+hist(steps_taken_per_day$steps,
+     breaks = 20,
+     col = "blue",
+     main = "Histogram of Total Number of Steps Taken per Day",
+     xlab = "Number of Steps per Day",
+     ylab = "Number of times")
+```
+  
+Finally,we calculate and report the mean and median of the total number of steps
+taken per day:  
+```{r mean_median}
+mean_steps = mean(steps_taken_per_day$steps, na.rm=TRUE)
+median_steps = median(steps_taken_per_day$steps, na.rm=TRUE)
+```
+
+The mean is **`r format(mean_steps)`** and 
+the median is **`r format(median_steps)`**.
+  
 ## What is the average daily activity pattern?
+First, we calculate the aggregation of steps by intervals of 5-minutes 
+and give names for columns of the result of this aggregation.
+```{r}
+steps_per_interval <- aggregate(steps ~ interval, activity, mean)
+colnames(steps_per_interval) <- c("interval", "steps")
 
-
+```
+  
+Then, we present below a plot with the time series of the average number
+of steps taken (averaged across all days) versus the 5-minute intervals:
+```{r}
+plot(steps_per_interval, type = "l", 
+     col = "dark blue",
+     main = "Average Daily Activity Pattern",
+     xlab = "Interval",
+     ylab = "Number of steps")
+```
+  
+Then, we calculate the 5-minute interval with the maximum number of steps,
+on average across all the days in the dataset:
+```{r}
+steps_per_interval$interval[which.max(steps_per_interval$steps)]
+```
+This means that **08:35** is the 5-minute interval with the **maximum number of steps**,
+on average across all the days.
   
 ## Imputing missing values
-
-
+First calculate and report the total number of missing values in the dataset
+(i.e. the total number of rows with NAs)
+```{r na_count}
+na_count = sum(is.na(activity))
+na_count
+```
+So there are **`r na_count`** of missing values in our dataset.
   
 ## Are there differences in activity patterns between weekdays and weekends?
   
