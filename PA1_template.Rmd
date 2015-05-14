@@ -1,19 +1,35 @@
-#Reproducible Research: Peer Assessment 1
-
+---
+title: 'Reproducible Research: Peer Assessment 1'
+output:
+  html_document:
+    keep_md: yes
+---
 by Vasilis Daroglou  
 github repo with RMarkdown source code:  
 https://github.com/VDaroglou/RepData_PeerAssessment1  
   
-  
+ 
+## Prepare the Environment
+Throughout this report you can always find the code that I used to generate
+my output presents here. When writing code chunks in the R markdown document,
+always use **echo = TRUE** so that someone else will be able to read the code.
+This assignment will be evaluated via peer assessment so **it’s essential that**
+**my peer evaluators be able to review my code and my analysis together.**  
+I also change the locale to English in order to ensure the same output for 
+peers with other system languages.
+```{r, results = 'hide'}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+Sys.setlocale("LC_TIME","English")
+```
+   
 ## Loading and preprocessing the data
 1.  Set working direcory to the local repo directory.
-2.  Set system locale to Engilsh.
-3.  The data is read as a data variable type data frame.  
-4.  **steps** column is converted to numeric type.(missing values are coded as NA)  
-5.  **date** column is converted to Date type.  
-6.  **interval** column is converted to numeric type.  
+2.  The data is read as a data variable type data frame.  
+3.  **steps** column is converted to numeric type.(missing values are coded as NA)  
+4.  **date** column is converted to Date type.  
+5.  **interval** column is converted to numeric type.  
 ```{r}
-Sys.setlocale("LC_TIME","English")
 unzip("activity.zip")
 activity <- read.csv("activity.csv",
                      header=TRUE,
