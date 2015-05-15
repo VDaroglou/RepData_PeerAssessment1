@@ -1,10 +1,12 @@
 # Reproducible Research: Peer Assessment 1
-by Vasilis Daroglou  
+by **Vasilis Daroglou**  
 github repo with RMarkdown source code:  
 https://github.com/VDaroglou/RepData_PeerAssessment1  
   
  
 ## Prepare the Environment
+**<u>First of all, you NEED make sure to SET the WORKING DIRECTORY to your**
+**LOCAL REPO FOLDER.</u>**  
 Throughout this report you can always find the code that I used to generate
 my output presents here. When writing code chunks in the R markdown document,
 always use **echo = TRUE** so that someone else will be able to read the code.
@@ -27,11 +29,10 @@ Sys.setlocale("LC_TIME","English")
 ```
    
 ## Loading and preprocessing the data
-1.  Set working direcory to the local repo directory.
-2.  The data is read as a data variable type data frame.  
-3.  **steps** column is converted to numeric type.(missing values are coded as NA)  
-4.  **date** column is converted to Date type.  
-5.  **interval** column is converted to numeric type.  
+1.  The data is read as a data variable type data frame.  
+2.  **steps** column is converted to numeric type.(missing values are coded as NA)  
+3.  **date** column is converted to Date type.  
+4.  **interval** column is converted to numeric type.  
 
 ```r
 unzip("activity.zip")
@@ -87,7 +88,7 @@ median_steps = median(steps_taken_per_day$steps, na.rm=TRUE)
 ```
 
 The **mean** is **10766.19** and 
-the **median** is **10765**.
+the **median** is **10765.**
   
 ## What is the average daily activity pattern?
 First, we calculate the aggregation of steps by intervals of 5-minutes 
@@ -121,8 +122,8 @@ steps_per_interval$interval[which.max(steps_per_interval$steps)]
 ```
 ## [1] 835
 ```
-This means that **08:35** is the 5-minute interval with the 
-**maximum number of steps**, on average across all the days.
+Therefore, the 5-minute interval between **08:35** and **08:40** has the
+**maximum number of steps**, on average across all days.
   
 ## Imputing missing values  
 #### Total number of missing values in the dataset
@@ -139,14 +140,16 @@ na_count
 ```
 So there are **2304 missing values** in our dataset.  
   
+  
 #### Strategy for filling in all of the missing values in the dataset
 In this part of the assignment, we devise a strategy for filling in 
 all of the missing values in the dataset. The strategy is not
 sophisticated.  
 We choose to use the mean for the 5-minute interval
 as fillers for missing values.  
-
-#### Creation of new dataset with the missing data filled in.
+  
+  
+#### Creation of new dataset with the missing data filled in
 So we start creating a new dataseta that is equal to the original dataset
 but with the missing data filled in with the mean for the 5-minute interval.
 
@@ -180,6 +183,8 @@ sum(is.na(imputed_activity))
 ```
 ## [1] 0
 ```
+  
+  
 #### Histogram of the total number of steps taken each day.(missing data filled in)
 We initiate with a pre-calculation of steps aggregation by day:
 
@@ -214,7 +219,8 @@ median_full_steps = median(full_steps_taken_per_day$steps)
 
 The **mean** is **10766.19** and 
 the **median** is **10766.19**.  
-
+  
+  
 #### What is the impact of imputing missing data on the estimates of the total daily number of steps?
 So now we wil compare these values with the values from the estimates
 from the first part of the assignment. 

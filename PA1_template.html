@@ -64,10 +64,10 @@ img {
 </div>
 
 
-<p>by Vasilis Daroglou<br />github repo with RMarkdown source code:<br /><a href="https://github.com/VDaroglou/RepData_PeerAssessment1">https://github.com/VDaroglou/RepData_PeerAssessment1</a></p>
+<p>by <strong>Vasilis Daroglou</strong><br />github repo with RMarkdown source code:<br /><a href="https://github.com/VDaroglou/RepData_PeerAssessment1">https://github.com/VDaroglou/RepData_PeerAssessment1</a></p>
 <div id="prepare-the-environment" class="section level2">
 <h2>Prepare the Environment</h2>
-<p>Throughout this report you can always find the code that I used to generate my output presents here. When writing code chunks in the R markdown document, always use <strong>echo = TRUE</strong> so that someone else will be able to read the code. This assignment will be evaluated via peer assessment so <strong>it’s essential that</strong> <strong>my peer evaluators be able to review my code and my analysis together.</strong><br />I also change the locale to English in order to ensure the same output for peers with other system languages.</p>
+<p><strong><u>First of all, you NEED make sure to SET the WORKING DIRECTORY to your</strong> <strong>LOCAL REPO FOLDER.</u></strong><br />Throughout this report you can always find the code that I used to generate my output presents here. When writing code chunks in the R markdown document, always use <strong>echo = TRUE</strong> so that someone else will be able to read the code. This assignment will be evaluated via peer assessment so <strong>it’s essential that</strong> <strong>my peer evaluators be able to review my code and my analysis together.</strong><br />I also change the locale to English in order to ensure the same output for peers with other system languages.</p>
 <pre class="r"><code>library(knitr)</code></pre>
 <pre><code>## Warning: package 'knitr' was built under R version 3.1.3</code></pre>
 <pre class="r"><code>opts_chunk$set(echo = TRUE)
@@ -76,7 +76,6 @@ Sys.setlocale(&quot;LC_TIME&quot;,&quot;English&quot;)</code></pre>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <ol style="list-style-type: decimal">
-<li>Set working direcory to the local repo directory.</li>
 <li>The data is read as a data variable type data frame.<br /></li>
 <li><strong>steps</strong> column is converted to numeric type.(missing values are coded as NA)<br /></li>
 <li><strong>date</strong> column is converted to Date type.<br /></li>
@@ -111,7 +110,7 @@ colnames(steps_taken_per_day) &lt;- c(&quot;date&quot;, &quot;steps&quot;)</code
 <p>Finally, we calculate and report the mean and median of the total number of steps taken per day:</p>
 <pre class="r"><code>mean_steps = mean(steps_taken_per_day$steps, na.rm=TRUE)
 median_steps = median(steps_taken_per_day$steps, na.rm=TRUE)</code></pre>
-<p>The <strong>mean</strong> is <strong>10766.19</strong> and the <strong>median</strong> is <strong>10765</strong>.</p>
+<p>The <strong>mean</strong> is <strong>10766.19</strong> and the <strong>median</strong> is <strong>10765.</strong></p>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
 <h2>What is the average daily activity pattern?</h2>
@@ -128,7 +127,7 @@ colnames(steps_per_interval) &lt;- c(&quot;interval&quot;, &quot;steps&quot;)</c
 <p>Then, we calculate the 5-minute interval with the maximum number of steps, on average across all the days in the dataset:</p>
 <pre class="r"><code>steps_per_interval$interval[which.max(steps_per_interval$steps)]</code></pre>
 <pre><code>## [1] 835</code></pre>
-<p>This means that <strong>08:35</strong> is the 5-minute interval with the <strong>maximum number of steps</strong>, on average across all the days.</p>
+<p>Therefore, the 5-minute interval between <strong>08:35</strong> and <strong>08:40</strong> has the <strong>maximum number of steps</strong>, on average across all days.</p>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
@@ -144,8 +143,8 @@ na_count</code></pre>
 <h4>Strategy for filling in all of the missing values in the dataset</h4>
 <p>In this part of the assignment, we devise a strategy for filling in all of the missing values in the dataset. The strategy is not sophisticated.<br />We choose to use the mean for the 5-minute interval as fillers for missing values.</p>
 </div>
-<div id="creation-of-new-dataset-with-the-missing-data-filled-in." class="section level4">
-<h4>Creation of new dataset with the missing data filled in.</h4>
+<div id="creation-of-new-dataset-with-the-missing-data-filled-in" class="section level4">
+<h4>Creation of new dataset with the missing data filled in</h4>
 <p>So we start creating a new dataseta that is equal to the original dataset but with the missing data filled in with the mean for the 5-minute interval.</p>
 <pre class="r"><code>imputed_activity &lt;- merge(activity,
                           steps_per_interval, 
