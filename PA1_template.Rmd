@@ -230,3 +230,4 @@ We can observe from the graph above that activities on the **weekdays** have the
 **weekends** steps have **more peaks over hundred steps** than weekdays. We can
 relate this to the fact that in weekends a person has more free time to do more
 intesive activities along the day than in weekdays, probably because of work.
+That is in weekends, the volunteer make more steps in day time.
